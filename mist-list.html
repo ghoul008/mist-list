@@ -899,8 +899,11 @@
                 outerScroller = this.$.grid.$.outerscroller,
                 hasVerticalScroll = outerScroller.scrollWidth > outerScroller.clientWidth,
                 heightOffset = 36;
-            if (this.$.slottedHeader.assignedElements().length) {
-                top += this.$.slottedHeader.assignedElements()[0].getBoundingClientRect().height;
+            var headerSlotElements = this.$.slottedHeader.assignedElements();
+            if (headerSlotElements.length) {
+                for (var i = 0; i<headerSlotElements.length; i++) {
+                    top += headerSlotElements[i].getBoundingClientRect().height;
+                }
             }
             if (hasVerticalScroll) {
                 heightOffset += 19;
