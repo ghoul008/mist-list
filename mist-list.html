@@ -887,13 +887,14 @@
             this.debounce('resize', function () { this.fire('resize'); }, 500);
         },
 
-        _windowResize: function () {
+        _windowResize: function (e) {
+            e.stopPropagation();
             if (!this.resizable) {
                 return;
             }
             var top = this.getBoundingClientRect().top,
                 newHeight,
-                itemsHeight = (this.$.grid.items && this.$.grid.items.length || 0) * 45,
+                itemsHeight = (this.$.grid.items && this.$.grid.items.length || 0) * 55,
                 isSmallScreen = window.innerWidth <= 768,
                 outerScroller = this.$.grid.$.outerscroller,
                 hasVerticalScroll = outerScroller.scrollWidth > outerScroller.clientWidth,
