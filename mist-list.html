@@ -343,7 +343,7 @@
                 received={{received}} columns={{columns}} frozen=[[frozen]] item-map={{itemMap}} primary-field-name="[[primaryFieldName]]"
                 timeseries=[[timeseries]] filter="[[combinedFilter]]" finished={{finished}}></rest-data-provider>
         </template>
-        <slot name="header"></slot>
+        <slot id="slottedHeader" name="header"></slot>
         <app-toolbar hidden$=[[!toolbar]]>
             <mist-filter id$="[[id]]" name=[[name]] searchable=[[searchable]] base-filter=[[baseFilter]]
                 user-filter={{userFilter}} combined-filter={{combinedFilter}} editing-filter={{editingFilter}}
@@ -894,11 +894,14 @@
             }
             var top = this.getBoundingClientRect().top,
                 newHeight,
-                itemsHeight = (this.$.grid.items && this.$.grid.items.length || 0) * 55,
+                itemsHeight = (this.$.grid.items && this.$.grid.items.length || 0) * 56,
                 isSmallScreen = window.innerWidth <= 768,
                 outerScroller = this.$.grid.$.outerscroller,
                 hasVerticalScroll = outerScroller.scrollWidth > outerScroller.clientWidth,
                 heightOffset = 36;
+            if (this.$.slottedHeader.assignedElements().length) {
+                top += this.$.slottedHeader.assignedElements()[0].getBoundingClientRect().height;
+            }
             if (hasVerticalScroll) {
                 heightOffset += 19;
             }
